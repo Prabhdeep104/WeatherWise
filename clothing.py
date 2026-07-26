@@ -13,7 +13,7 @@ def get_temperature_advice(temperature):
         return "Wear a thick coat, warm layers, gloves and a scarf."
 
 
-def get_weather_advice(description):
+def get_weather_advice(description, icon):
     """Return additional advice based on the weather description."""
 
     description = description.lower()
@@ -23,16 +23,19 @@ def get_weather_advice(description):
         advice.append("Take an umbrella or wear a waterproof jacket.")
 
     if "snow" in description:
-        advice.append("Wear waterproof shoes and take care on slippery surfaces.")
+        advice.append(
+            "Wear waterproof shoes and take care on slippery surfaces."
+        )
 
     if "thunderstorm" in description:
-        advice.append("Avoid unnecessary outdoor activities where possible.")
+        advice.append(
+            "Avoid unnecessary outdoor activities where possible."
+        )
 
-    if "clear" in description:
+    if "clear" in description and icon.endswith("d"):
         advice.append("Consider sunglasses if you are going outside.")
 
     return advice
-
 
 def get_wind_advice(wind_speed):
     """Return additional advice based on wind speed."""
@@ -72,11 +75,11 @@ def get_forecast_advice(forecast_summary):
 
 
 
-
 def clothing_recommendation(
     temperature,
     description,
     wind_speed,
+    icon,
     forecast_summary=None
 ):
     recommendations = [
@@ -84,7 +87,7 @@ def clothing_recommendation(
     ]
 
     recommendations.extend(
-        get_weather_advice(description)
+        get_weather_advice(description, icon)
     )
 
     wind_advice = get_wind_advice(wind_speed)
@@ -98,6 +101,5 @@ def clothing_recommendation(
         )
 
     return recommendations
-
 
 

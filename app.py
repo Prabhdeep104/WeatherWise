@@ -38,11 +38,12 @@ def index():
 
                 # Generate clothing recommendations
                 recommendations = clothing_recommendation(
-                    temperature=weather_data["temperature"],
-                    description=weather_data["description"],
-                    wind_speed=weather_data["wind"],
-                    forecast_summary=forecast_summary
-                )
+                    weather_data["temperature"],
+                    weather_data["description"],
+                    weather_data["wind"],
+                    weather_data["icon"],
+                    forecast_summary
+  )
 
             else:
                 error_message = result["error"]
