@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Weather Assistant</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body class="{% if weather and weather.icon.endswith('n') %}night{% else %}day{% endif %}">
+
+    <main class="weather-container">
+
+        <section class="weather-card">
+
+            <h1>Weather Assistant</h1>
+
+            <p class="subtitle">
+                Check the weather and find out what to wear.
+            </p>
+
+            <form method="POST" class="search-form">
+                <input
+                    type="text"
+                    name="city"
+                    placeholder="Enter a city"
+                    required
+                >
+
+                <button type="submit">
+                    Search
+                </button>
+            </form>
+
+            {% if error %}
+                <p class="error-message">{{ error }}</p>
+            {% endif %}
+
+            {% if weather %}
+                <section class="weather-results">
+
+                    <div class="weather-symbol">
+
+    {% if weather.icon == "01n" %}
+        <span class="custom-weather-icon">🌙</span>
+
+    {% elif weather.icon == "01d" %}
+        <span class="custom-weather-icon">☀️</span>
+
+    {% else %}
+        <img
+            src="https://openweathermap.org/img/wn/{{ weather.icon }}@4x.png"
+            alt="{{ weather.description }}"
+        >
+    {% endif %}
+
+</div>
+
+                    <h2>{{ weather.city }}, {{ weather.country }}</h2>
+
+                    <p class="temperature">
+                    {{ weather.temperature }}°C
+                    </p>
+
+        <p class="description">
+            {{ weather.description | title }}
+        </p>
+                    <div class="weather-details">
+
+                        <div class="detail-box">
+                            <span>Feels like</span>
+                            <strong>{{ weather.feels_like }}°C</strong>
+                        </div>
+
+                        <div class="detail-box">
+                            <span>Humidity</span>
+                            <strong>{{ weather.humidity }}%</strong>
+                        </div>
+
+                        <div class="detail-box">
+                            <span>Wind speed</span>
+                            <strong>{{ weather.wind }} m/s</strong>
+                        </div>
+
+                    </div>
+
+                </section>
+            {% endif %}
+
+            {% if recommendations %}
+                <section class="recommendation-section">
+
+                    <h2>What should you wear?</h2>
+
+                    <ul>
+                        {% for recommendation in recommendations %}
+                            <li>{{ recommendation }}</li>
+                        {% endfor %}
+                    </ul>
+
+                </section>
+            {% endif %}
+
+        </section>
+
+    </main>
+
+</body>
+</html>

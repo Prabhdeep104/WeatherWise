@@ -23,7 +23,8 @@ def get_weather(city):
             "feels_like": round(data["main"]["feels_like"]),
             "description": data["weather"][0]["description"].capitalize(),
             "humidity": data["main"]["humidity"],
-            "wind": data["wind"]["speed"]
+            "wind": data["wind"]["speed"],
+            "icon": data["weather"][0]["icon"],
         }
 
     elif response.status_code == 404:
