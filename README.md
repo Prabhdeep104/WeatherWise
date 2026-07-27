@@ -1,4 +1,4 @@
-# Weather_App_Project
+# Weather Wise
 
 
 A Python Flask web application that provides real-time weather information and intelligent clothing recommendations based on both the current weather and the upcoming forecast.
